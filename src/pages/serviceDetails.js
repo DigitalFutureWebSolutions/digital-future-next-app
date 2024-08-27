@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../Component/Header';
 import Sidebar from '../Component/Sidebar';
 import FooterSection from "../Component/Footer";
-import './custom.css';
 
 function ServiceDetails() {
     // Define backgroundStyle outside of useEffect
