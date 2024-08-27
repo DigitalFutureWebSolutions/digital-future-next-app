@@ -11,8 +11,6 @@ import ReactHtmlParser from 'html-react-parser';
 
 const BlogDetails = () => {
 
-
-    // Define backgroundStyle outside of useEffect
     const backgroundStyle = {
         backgroundImage: 'url(/assets/img/bg-img/page-header-bg.jpg)',
         backgroundSize: 'cover',
