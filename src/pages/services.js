@@ -27,7 +27,6 @@ function Service() {
     const default_meta_keyword = settingData?.default_meta_keyword || '';
 
     return (
-        // <div className="text-white ">
         <div className="body ">
 
             <Head>
