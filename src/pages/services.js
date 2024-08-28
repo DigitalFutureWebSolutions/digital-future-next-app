@@ -111,7 +111,7 @@ function Service() {
                                             </div>
                                         </div>
                                     ))
-                                ) : "data"}
+                                ) : ""}
                             </div>
 
                         </div>
