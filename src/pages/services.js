@@ -35,9 +35,9 @@ function Service() {
                 <meta name="description" content={default_meta_description} />
                 <meta name="keyword" content={default_meta_keyword} />
             </Head>
-            <Header />
+            <Header apiServiceData= {apiServiceData} />
             <div id="popup-search-box">
-                <div className="box-inner-wrap d-flex align-items-center">
+                <div className="box-inner-wrap d-flex align-items-center"> 
                     <form id="form" action="#" method="get" role="search">
                         <input
                             id="popup-search"

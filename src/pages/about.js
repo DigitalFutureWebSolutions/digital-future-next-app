@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Header from '../Component/Header';
 import Sidebar from '../Component/Sidebar';
@@ -18,9 +18,11 @@ function About() {
     const apiSettingData = useSelector((state) => state.apiData.data.apisetting);
     const settingData = apiSettingData && apiSettingData.settings
     const apiTestimonialsData = useSelector((state) => state.apiData.data.apitestimonials);
+    const apiServiceData = useSelector((state) => state.apiData.data.apiservice);
     useEffect(() => {
         dispatch(fetchAPIData('apiSetting'));
         dispatch(fetchAPIData('apiTestimonials'));
+        dispatch(fetchAPIData('apiService'));
     }, [dispatch]);
 
 
@@ -37,7 +39,7 @@ function About() {
                 <meta name="description" content={default_meta_description} />
                 <meta name="keyword" content={default_meta_keyword} />
             </Head>
-            <Header />
+            <Header apiServiceData={apiServiceData} />
             <div id="popup-search-box">
                 <div className="box-inner-wrap d-flex align-items-center">
                     <form id="form" action="#" method="get" role="search">

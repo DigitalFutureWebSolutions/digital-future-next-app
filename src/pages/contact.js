@@ -4,48 +4,27 @@ import Header from '../Component/Header';
 import Sidebar from '../Component/Sidebar';
 import FooterSection from "../Component/Footer";
 import Link from 'next/link';
-
+import { fetchAPIData } from '../../actions/homeActions';
+import { useDispatch, useSelector } from 'react-redux';
 // const Preloader = () => (
 //     <div id="preloader">
 //       <div className="loading" data-loading-text="Digital"></div>
 //     </div>
 //   );
 function Contact() {
-    const [settingdata, setSettingData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(0);
-    // const [preloaderVisible, setPreloaderVisible] = useState(true);
-    // const initializeAnimations = () => {
-    //     // Example GSAP animation initialization
-    //     gsap.fromTo(".animate-me", { opacity: 0 }, { opacity: 1, duration: 1 });
-    // };
+    const dispatch = useDispatch();
+    const apiSettingData = useSelector((state) => state.apiData.data.apisetting);
+    const settingData = apiSettingData && apiSettingData.settings
+    const apiServiceData = useSelector((state) => state.apiData.data.apiservice);
     useEffect(() => {
+        dispatch(fetchAPIData('apiSetting'));
+        dispatch(fetchAPIData('apiService'));
+    }, [dispatch]);
 
-        const fetchSettingData = async () => {
-            try {
-                const response = await fetch('https://dfweb-v2.onrender.com/api/v1/api-settings');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                setSettingData(result.settings);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
-                // Hide preloader after data is fetched
-                // setTimeout(() => {
-                //     setPreloaderVisible(false);
-                //     // Initialize animations after preloader is hidden
-                //     initializeAnimations();
-                // }, 2000); // Adjust time as needed
-            }
-        };
-        fetchSettingData();
-    }, []);
-    const default_meta_title = settingdata && settingdata.default_meta_title || '';
-    const default_meta_description = settingdata?.default_meta_description || '';
-    const default_meta_keyword = settingdata?.default_meta_keyword || '';
+
+    const default_meta_title = settingData && settingData.default_meta_title || '';
+    const default_meta_description = settingData?.default_meta_description || '';
+    const default_meta_keyword = settingData?.default_meta_keyword || '';
     return (
         <div className="body">
             <Head>
@@ -53,7 +32,7 @@ function Contact() {
                 <meta name="description" content={default_meta_description} />
                 <meta name="keyword" content={default_meta_keyword} />
             </Head>
-            <Header />
+            <Header apiServiceData = {apiServiceData} />
             <div id="popup-search-box">
                 <div className="box-inner-wrap d-flex align-items-center">
                     <form id="form" action="#" method="get" role="search">
@@ -69,7 +48,7 @@ function Contact() {
                     </div>
                 </div>
             </div>
-            <Sidebar data={settingdata} />
+            <Sidebar data={settingData} />
             {/* {preloaderVisible && <Preloader />} */}
 
             <div id="smooth-wrapper">
@@ -326,7 +305,7 @@ function Contact() {
                             ></iframe>
                         </div>
                     </div>
-                    <FooterSection data={settingdata} />
+                    <FooterSection data={settingData} />
                 </div>
             </div>
             <div id="scroll-percentage"><span id="scroll-percentage-value"></span></div>

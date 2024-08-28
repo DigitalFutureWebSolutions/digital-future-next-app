@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import Head from 'next/head';
 import Header from '../Component/Header';
 import Sidebar from '../Component/Sidebar';
@@ -11,9 +11,11 @@ function Blog() {
     const apiSettingData = useSelector((state) => state.apiData.data.apisetting);
     const settingData = apiSettingData && apiSettingData.settings
     const apiBlogsData = useSelector((state) => state.apiData.data.apiblogs);
+    const apiServiceData = useSelector((state) => state.apiData.data.apiservice);
     useEffect(() => {
         dispatch(fetchAPIData('apiSetting'));
         dispatch(fetchAPIData('apiBlogs'));
+        dispatch(fetchAPIData('apiService'));
     }, [dispatch]);
     const default_meta_title = settingData && settingData.default_meta_title || '';
     const default_meta_description = settingData?.default_meta_description || '';
@@ -25,7 +27,7 @@ function Blog() {
                     <meta name="description" content={default_meta_description} />
                     <meta name="keyword" content={default_meta_keyword} />
                 </Head>
-            <Header />
+            <Header apiServiceData = {apiServiceData}/>
             <div id="popup-search-box">
                 <div className="box-inner-wrap d-flex align-items-center">
                     <form id="form" action="#" method="get" role="search">
